@@ -71,7 +71,7 @@ export default function Header() {
           </NavLink>
         </div>
       ) : (
-        <div className="logo">로고</div>
+        <div className="logo">방과후에 뭐하니?</div>
       )}
       <div className="icon-search">
         <NavLink

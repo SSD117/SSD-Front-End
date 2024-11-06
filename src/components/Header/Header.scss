@@ -10,7 +10,7 @@
   right: 0;
   height: 6vh;
   z-index: 100;
-  background-image: linear-gradient(to right bottom, #3881ff, #ab2eff);
+  background-color: #ffffff; // 배경색을 흰색으로 설정
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   min-width: 100vw;
   max-width: $max-width;
@@ -31,7 +31,7 @@
     align-items: center;
     font-size: 1.5rem;
     font-weight: bold;
-    color: #eaeaea;
+    color: #333333; // 로고 색상을 어두운 회색으로 설정
     padding-left: 1rem;
   }
 
@@ -55,7 +55,7 @@
     }
 
     .active {
-      color: #eaeaea;
+      color: #333333; // 아이콘의 활성화 색상도 어두운 회색으로 설정
     }
   }
 
@@ -66,7 +66,7 @@
     font-size: 1.5rem;
 
     .nav-link {
-      color: #eaeaea;
+      color: #333333; // 아이콘 색상을 어두운 회색으로 변경
       font-size: 20px;
       font-weight: bold;
     }

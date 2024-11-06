@@ -1,0 +1,94 @@
+/* MainPage.css */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.main-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+.welcome-message {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.welcome-message h1 {
+    font-size: 24px;
+    color: #333;
+}
+
+.welcome-message p {
+    font-size: 16px;
+    color: #555;
+}
+
+.card-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    max-width: 500px;
+}
+
+.recommendation-card,
+.benefit-info {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.recommendation-card h2,
+.benefit-info h2 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.recommendation-card p,
+.benefit-info p {
+    font-size: 14px;
+    color: #555;
+}
+
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 500px;
+    margin-top: 20px;
+}
+
+.history-button,
+.stats-button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.history-button {
+    background-color: #7D170A;
+}
+
+.stats-button {
+    background-color: #444;
+}
+
+.history-button:hover,
+.stats-button:hover {
+    opacity: 0.9;
+}
