@@ -1,0 +1,84 @@
+@import "../../App.scss";
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6vh;
+  z-index: 100;
+  background-image: linear-gradient(to right bottom, #3881ff, #ab2eff);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  min-width: 100vw;
+  max-width: $max-width;
+  margin-left: auto;
+  margin-right: auto;
+  transition: top 0.3s;
+
+  &.hidden {
+    top: -6vh;
+  }
+
+  &.visible {
+    top: 0;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #eaeaea;
+    padding-left: 1rem;
+  }
+
+  .icon-back {
+    display: flex;
+    align-items: center;
+    padding-left: 1rem;
+    font-size: 1.5rem;
+
+    .nav-link {
+      color: rgb(155, 155, 155);
+      font-size: 20px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+    }
+
+    .header-text {
+      margin-left: 0.5rem; // 아이콘과 텍스트 사이의 간격
+      color: inherit;
+    }
+
+    .active {
+      color: #eaeaea;
+    }
+  }
+
+  .icon-search {
+    display: flex;
+    align-items: center;
+    padding-right: 1rem;
+    font-size: 1.5rem;
+
+    .nav-link {
+      color: #eaeaea;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .active {
+      display: none;
+    }
+  }
+}
+
+@media (min-width: $max-width) {
+  .header {
+    min-width: $max-width;
+  }
+}
