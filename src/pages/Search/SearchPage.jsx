@@ -1,5 +1,5 @@
 import React from "react";
-import "./SearchPage.scss";
+import "./SearchPage.css";
 
 import SearchBar from "../../components/SearchBar/SearchBar";
 

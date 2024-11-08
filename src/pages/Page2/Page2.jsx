@@ -1,5 +1,5 @@
 import React from "react";
-import "./Page2.scss";
+import "./Page2.css";
 
 export default function Page2() {
   return (
