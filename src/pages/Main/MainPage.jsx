@@ -20,10 +20,15 @@ export default function MainPage() {
           <p>30분 조깅으로 상쾌하게 시작해보세요!</p>
         </section>
         
-        <section className="benefit-info">
+        <a
+          href="https://svoucher.kspo.or.kr/main.do"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="benefit-info"
+        >
           <h2>스포츠 강좌 혜택 안내</h2>
           <p>청소년 스포츠 강좌 이용권으로 다양한 혜택을 누리세요.</p>
-        </section>
+        </a>
       </div>
       
       <div className="action-buttons">

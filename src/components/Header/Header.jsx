@@ -49,7 +49,7 @@ export default function Header() {
     setLastScrollY(scrollY);
   }, [scrollY]);
 
-  const excludePaths = ["/", "/page1", "/page2", "/page3", "/page4"];
+  const excludePaths = ["/","/mainPage", "/page1", "/page2", "/page3", "/page4"];
   const showBackButton = !excludePaths.includes(location.pathname);
 
   return (

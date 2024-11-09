@@ -1,0 +1,20 @@
+/* SplashPage.css */
+.splash-screen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: white;
+    /* 배경색을 흰색으로 설정 */
+    margin: 0;
+    padding: 0;
+}
+
+.app-logo {
+    width: 100%;
+    /* 화면의 너비에 맞게 설정 */
+    height: 100%;
+    /* 화면의 높이에 맞게 설정 */
+    object-fit: contain;
+    /* 이미지가 비율에 맞게 조절됨 */
+}

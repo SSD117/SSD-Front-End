@@ -13,7 +13,7 @@ import "./Navbar.scss";
 export default function Navbar() {
   const location = useLocation();
 
-  const allowedPaths = ["/", "/page1", "/page2", "/page3", "/page4"];
+  const allowedPaths = ["/mainPage", "/page1", "/page2", "/page3", "/page4"];
 
   // 현재 경로가 allowedPaths에 포함되지 않으면 null 반환
   if (!allowedPaths.includes(location.pathname)) {
@@ -24,7 +24,7 @@ export default function Navbar() {
     <div className="nav_bar">
       <div>
         <NavLink
-          to="/"
+          to="/mainPage"
           className={({ isActive }) =>
             isActive ? "nav-link active" : "nav-link"
           }

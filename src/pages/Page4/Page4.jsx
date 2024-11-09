@@ -7,7 +7,7 @@ export default function Page4() {
   const navigate = useNavigate();
 
   const handleSignupClick = () => {
-    navigate("/page4/Page4_1");
+    navigate("/page4/signup");
   };
 
   return (
