@@ -2,6 +2,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./Page4.css";
+import AppLogo from "../../assets/images/AppImg.png"; 
+
 
 export default function Page4() {
   const navigate = useNavigate();
@@ -12,7 +14,7 @@ export default function Page4() {
 
   return (
     <div className="login-page">
-      <h1>로그인</h1>
+      <img src={AppLogo} alt="App Logo" className="app-logo" />
       <form className="login-form">
         <label htmlFor="email">이메일</label>
         <input type="email" id="email" placeholder="이메일을 입력하세요" required />

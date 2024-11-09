@@ -7,7 +7,7 @@ export default function Page4_1() {
 
   const handleSignupClick = (e) => {
     e.preventDefault(); // 폼 제출 방지
-    navigate("/page4/signup");
+    navigate("/page4/signup2");
   };
 
   return (

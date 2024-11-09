@@ -1,7 +1,16 @@
 import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import './Page4_2.css';
 
 const Page4_2 = () => {
+  const navigate = useNavigate();
+
+  const handleSignupClick = (e) => {
+    e.preventDefault(); // 폼 제출 방지
+    navigate("/mainPage");
+  };
+
+
   const [formData, setFormData] = useState({
     name: '',
     age: '',
@@ -37,7 +46,6 @@ const Page4_2 = () => {
     <div className="form-container">
       <h2>회원 정보 입력</h2>
       <form onSubmit={handleSubmit}>
-        {/* 기본 정보 */}
         <div className="section">
           <h3>기본 정보</h3>
           <div className="form-group">
@@ -147,7 +155,7 @@ const Page4_2 = () => {
           </div>
         </div>
 
-        <button type="submit">제출</button>
+        <button type="submit" onClick={handleSignupClick} >제출</button>
       </form>
     </div>
   );
