@@ -11,7 +11,7 @@ export default function Splash() {
     // 3초 후에 MainPage로 이동
     const timer = setTimeout(() => {
       navigate("/mainPage"); // "/main" 경로는 MainPage.jsx의 경로로 설정
-    }, 3000);
+    }, 2500);
 
     // 컴포넌트가 언마운트될 때 타이머를 정리
     return () => clearTimeout(timer);
