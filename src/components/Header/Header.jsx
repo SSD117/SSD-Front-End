@@ -1,11 +1,14 @@
+import React, { useEffect, useState } from "react";
+
 import {
   faAngleLeft,
   faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useEffect, useState } from "react";
 import { NavLink, useLocation, useNavigate, useParams } from "react-router-dom";
 import "./Header.scss";
+import AppLogo from "../../assets/images/AppLogo.png";
+
 
 export default function Header() {
   const [isVisible, setIsVisible] = useState(true);
@@ -46,7 +49,6 @@ export default function Header() {
     setLastScrollY(scrollY);
   }, [scrollY]);
 
-  // 추가된 코드: 특정 경로를 제외한 모든 경로에 뒤로가기 버튼 표시
   const excludePaths = ["/", "/page1", "/page2", "/page3", "/page4"];
   const showBackButton = !excludePaths.includes(location.pathname);
 
@@ -71,7 +73,7 @@ export default function Header() {
           </NavLink>
         </div>
       ) : (
-        <div className="logo">방과후에 뭐하니?</div>
+        <img src={AppLogo} alt="방과후에 뭐하니?" className="logo" />
       )}
       <div className="icon-search">
         <NavLink

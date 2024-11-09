@@ -29,11 +29,11 @@
   .logo {
     display: flex;
     align-items: center;
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #333333; // 로고 색상을 어두운 회색으로 설정
     padding-left: 1rem;
+    width: 50%; // 원하는 너비로 조정
+    height: auto; // 높이를 자동 조정하여 비율 유지
   }
+  
 
   .icon-back {
     display: flex;
