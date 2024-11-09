@@ -1,8 +1,15 @@
-// Page4_1.js
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./Page4_1.css";
 
 export default function Page4_1() {
+  const navigate = useNavigate();
+
+  const handleSignupClick = (e) => {
+    e.preventDefault(); // 폼 제출 방지
+    navigate("/page4/signup");
+  };
+
   return (
     <div className="signup-page">
       <h1>회원가입</h1>
@@ -22,7 +29,7 @@ export default function Page4_1() {
         <label htmlFor="confirm-password">비밀번호 확인</label>
         <input type="password" id="confirm-password" placeholder="비밀번호를 다시 입력하세요" required />
 
-        <button type="submit" className="signup-submit-button">회원가입 완료</button>
+        <button type="submit" className="signup-submit-button" onClick={handleSignupClick}>회원가입 완료</button>
       </form>
     </div>
   );
