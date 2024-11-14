@@ -19,6 +19,7 @@ import MyPage from "./pages/MyPage";
 import SignUp from "./pages/SignUp";
 import SignUp1 from "./pages/SignUp_1";
 import SignUp2 from "./pages/SignUp_2";
+import Splash from "./pages/Splash";
 
 const Layout = () => (
   <div className="page">
@@ -41,14 +42,15 @@ function App() {
           <Route path="/page2" element={<Page2 />} />
           <Route path="/page3" element={<Page3 />} />
           <Route path="/page4" element={<Page4 />} />
-          
+          <Route path="/search" element={<SearchPage />} />
+
           <Route path="/login" element={<Login />} />
           <Route path="/main" element={<Main />} /> 
           <Route path="/mypage" element={<MyPage />} /> 
           <Route path="/signUp" element={<SignUp />} />
           <Route path="/signUp1" element={<SignUp1 />} />
           <Route path="/signUp2" element={<SignUp2 />} /> 
-          <Route path="/search" element={<SearchPage />} />
+          <Route path="/splash" element={<Splash />} /> 
         </Route>
       </Routes>
     </Router>
