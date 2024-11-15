@@ -1,40 +1,66 @@
-import React from "react";
-import "./MainPage.css";
+// MainPage.jsx
+import React, { useState } from "react";
+import FilterModal from "./FilterModal";
 
 export default function MainPage() {
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+
+  const toggleFilter = () => {
+    setIsFilterOpen(!isFilterOpen);
+  };
+
   return (
-    <div className="main-page">
-      <header className="welcome-message">
-        <h1>방과후에 뭐하니?</h1>
-        <p>청소년을 위한 체육 활동 추천 시스템에 오신 것을 환영합니다!</p>
+    <div className="main-page bg-gray-100 min-h-screen flex flex-col items-center">
+      <header className="mt-8 text-center">
+        <p className="text-lg font-semibold">내 위치 : 광운초등학교</p>
       </header>
-      
-      <div className="card-container">
-        <section className="recommendation-card">
-          <h2>오늘의 추천 운동</h2>
-          <p>간단한 스트레칭과 요가를 추천합니다!</p>
-        </section>
-        
-        <section className="recommendation-card">
-          <h2>내일의 추천 운동</h2>
-          <p>30분 조깅으로 상쾌하게 시작해보세요!</p>
-        </section>
-        
-        <a
-          href="https://svoucher.kspo.or.kr/main.do"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="benefit-info"
+
+      {/* 지도 Placeholder */}
+      <div className="w-11/12 h-48 bg-gray-300 my-4 flex items-center justify-center text-lg font-semibold text-gray-600">
+        지도?
+      </div>
+
+      {/* 프로그램 섹션 */}
+      <div className="w-11/12 flex justify-between items-center my-2">
+        <h2 className="text-lg font-semibold">체육 프로그램</h2>
+        <button
+          className="text-white bg-main01 rounded-full px-4 py-1"
+          onClick={toggleFilter}
         >
-          <h2>스포츠 강좌 혜택 안내</h2>
-          <p>청소년 스포츠 강좌 이용권으로 다양한 혜택을 누리세요.</p>
-        </a>
+          필터
+        </button>
       </div>
-      
-      <div className="action-buttons">
-        <button className="history-button">활동 기록 확인</button>
-        <button className="stats-button">통계 및 성과 확인</button>
+
+      {/* 프로그램 리스트 , 사진 미설정*/}
+      <div className="w-11/12 space-y-2">
+        <div className="flex items-center bg-gray-200 rounded-lg p-4">
+          <img src="/" alt="배드민턴" className="w-10 h-10 mr-4" />
+          <div className="flex-1">
+            <p className="text-sm font-semibold">배드민턴</p>
+            <p className="text-xs text-gray-600">000체육관 (1.2km)</p>
+          </div>
+          <span className="text-lg text-gray-600">➔</span>
+        </div>
+        <div className="flex items-center bg-gray-200 rounded-lg p-4">
+          <img src="/" alt="축구" className="w-10 h-10 mr-4" />
+          <div className="flex-1">
+            <p className="text-sm font-semibold">축구</p>
+            <p className="text-xs text-gray-600">000체육관 (1.2km)</p>
+          </div>
+          <span className="text-lg text-gray-600">➔</span>
+        </div>
+        <div className="flex items-center bg-gray-200 rounded-lg p-4">
+          <img src="/" alt="테니스" className="w-10 h-10 mr-4" />
+          <div className="flex-1">
+            <p className="text-sm font-semibold">테니스</p>
+            <p className="text-xs text-gray-600">000체육관 (1.2km)</p>
+          </div>
+          <span className="text-lg text-gray-600">➔</span>
+        </div>
       </div>
+
+      {/* 필터 모달 */}
+      <FilterModal isOpen={isFilterOpen} toggleFilter={toggleFilter} />
     </div>
   );
 }
