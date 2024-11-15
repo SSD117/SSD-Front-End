@@ -5,41 +5,41 @@ export default function FilterModal({ isOpen, toggleFilter }) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex justify-center items-center z-50">
-      <div className="bg-gray-700 w-80 rounded-lg p-4 text-white">
+    <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-end z-[1100] px-4"> {/* 좌우 여백 추가 */}
+      <div className="bg-white w-full max-w-sm rounded-t-2xl p-6 text-gray-800 animate-slide-up z-[1100]"> {/* 최대 너비를 sm으로 설정 */}
         <h3 className="text-lg font-semibold mb-4">거리</h3>
-        <div className="flex space-x-2 mb-4">
-          <button className="bg-gray-500 rounded-full px-3 py-1">1km</button>
-          <button className="bg-gray-500 rounded-full px-3 py-1">3km</button>
-          <button className="bg-gray-500 rounded-full px-3 py-1">5km</button>
-          <button className="bg-gray-500 rounded-full px-3 py-1">7km</button>
+        <div className="flex flex-wrap gap-2 mb-4"> {/* 버튼 사이 간격 설정 */}
+          <button className="bg-main02 text-main01 rounded-full px-4 py-2">1km</button>
+          <button className="bg-main02 text-main01 rounded-full px-4 py-2">3km</button>
+          <button className="bg-main02 text-main01 rounded-full px-4 py-2">5km</button>
+          <button className="bg-main02 text-main01 rounded-full px-4 py-2">7km</button>
         </div>
 
         <h3 className="text-lg font-semibold mb-4">유형</h3>
-        <div className="flex space-x-2 flex-wrap mb-4">
-          <button className="bg-gray-500 rounded-full px-3 py-1">배드민턴</button>
-          <button className="bg-gray-500 rounded-full px-3 py-1">축구</button>
-          <button className="bg-gray-500 rounded-full px-3 py-1">테니스</button>
-          <button className="bg-gray-500 rounded-full px-3 py-1">수영</button>
-          <button className="bg-gray-500 rounded-full px-3 py-1">농구</button>
-          <button className="bg-gray-500 rounded-full px-3 py-1">야구</button>
+        <div className="flex flex-wrap gap-2 mb-4"> {/* 버튼 사이 간격 설정 */}
+          <button className="bg-main02 text-main01 rounded-full px-4 py-2">배드민턴</button>
+          <button className="bg-main02 text-main01 rounded-full px-4 py-2">축구</button>
+          <button className="bg-main02 text-main01 rounded-full px-4 py-2">테니스</button>
+          <button className="bg-main02 text-main01 rounded-full px-4 py-2">수영</button>
+          <button className="bg-main02 text-main01 rounded-full px-4 py-2">농구</button>
+          <button className="bg-main02 text-main01 rounded-full px-4 py-2">야구</button>
         </div>
 
         <h3 className="text-lg font-semibold mb-4">시간</h3>
-        <div className="flex space-x-2 mb-4">
-          <button className="bg-gray-500 rounded-full px-3 py-1">주중</button>
-          <button className="bg-gray-500 rounded-full px-3 py-1">주말</button>
+        <div className="flex gap-2 mb-4"> {/* 버튼 사이 간격 설정 */}
+          <button className="bg-main02 text-main01 rounded-full px-4 py-2">주중</button>
+          <button className="bg-main02 text-main01 rounded-full px-4 py-2">주말</button>
         </div>
 
-        <div className="flex justify-between mt-4">
+        <div className="flex justify-between mt-6">
           <button
-            className="bg-gray-400 text-gray-900 rounded-lg px-4 py-2"
+            className="bg-main02 text-main01 font-semibold rounded-lg px-6 py-2"
             onClick={toggleFilter}
           >
             초기화
           </button>
           <button
-            className="bg-gray-400 text-gray-900 rounded-lg px-4 py-2"
+            className="bg-main02 text-main01 font-semibold rounded-lg px-6 py-2"
             onClick={toggleFilter}
           >
             적용
