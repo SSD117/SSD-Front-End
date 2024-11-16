@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // useNavigate import
 import FilterModal from "./FilterModal";
 import badmintonImage from "../../assets/images/badminton.png";
 import soccerImage from "../../assets/images/soccer.png";
@@ -6,9 +7,15 @@ import tennisImage from "../../assets/images/tennis.png";
 
 export default function MainPage() {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const navigate = useNavigate(); // useNavigate 선언
 
   const toggleFilter = () => {
     setIsFilterOpen(!isFilterOpen);
+  };
+
+  // 상세 페이지로 이동하는 함수
+  const goToDetailPage = (program) => {
+    navigate(`/details/${program}`); // URL에 프로그램 이름을 전달
   };
 
   return (
@@ -19,7 +26,7 @@ export default function MainPage() {
 
       {/* 지도 Placeholder */}
       <div className="w-11/12 h-48 bg-gray-300 my-4 flex items-center justify-center text-lg font-semibold text-gray-600">
-        지도?
+        지도 영역 div
       </div>
 
       {/* 프로그램 섹션 */}
@@ -36,7 +43,10 @@ export default function MainPage() {
       {/* 프로그램 리스트 */}
       <div className="w-11/12 space-y-2">
         {/* 배드민턴 */}
-        <div className="flex items-center bg-gray-200 rounded-lg p-4">
+        <div
+          className="flex items-center bg-gray-200 rounded-lg p-4 cursor-pointer"
+          onClick={() => goToDetailPage("badminton")}
+        >
           <img src={badmintonImage} alt="배드민턴" className="w-10 h-10 mr-4" />
           <div className="flex-1">
             <p className="text-sm font-semibold">배드민턴</p>
@@ -45,7 +55,10 @@ export default function MainPage() {
           <span className="text-lg text-gray-600">➔</span>
         </div>
         {/* 축구 */}
-        <div className="flex items-center bg-gray-200 rounded-lg p-4">
+        <div
+          className="flex items-center bg-gray-200 rounded-lg p-4 cursor-pointer"
+          onClick={() => goToDetailPage("soccer")}
+        >
           <img src={soccerImage} alt="축구" className="w-10 h-10 mr-4" />
           <div className="flex-1">
             <p className="text-sm font-semibold">축구</p>
@@ -54,7 +67,10 @@ export default function MainPage() {
           <span className="text-lg text-gray-600">➔</span>
         </div>
         {/* 테니스 */}
-        <div className="flex items-center bg-gray-200 rounded-lg p-4">
+        <div
+          className="flex items-center bg-gray-200 rounded-lg p-4 cursor-pointer"
+          onClick={() => goToDetailPage("tennis")}
+        >
           <img src={tennisImage} alt="테니스" className="w-10 h-10 mr-4" />
           <div className="flex-1">
             <p className="text-sm font-semibold">테니스</p>
