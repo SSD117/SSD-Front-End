@@ -50,7 +50,7 @@ export default function Header() {
   }, [scrollY]);
 
   // 특정 경로에서만 뒤로 가기 버튼을 보이도록 설정
-  const excludePaths = ["/", "/mainPage", "/page1", "/page2", "/page3", "/page4"];
+  const excludePaths = ["/", "/mainPage", "/page1", "/page2", "/myPage", "/page4"];
   const showBackButton = !excludePaths.includes(location.pathname) && !location.pathname.startsWith("/page4");
 
   // showBackButton 상태에 따라 isClicked 상태 업데이트
