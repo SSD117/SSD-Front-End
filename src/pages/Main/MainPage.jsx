@@ -1,6 +1,8 @@
-// MainPage.jsx
 import React, { useState } from "react";
 import FilterModal from "./FilterModal";
+import badmintonImage from "../../assets/images/badminton.png";
+import soccerImage from "../../assets/images/soccer.png";
+import tennisImage from "../../assets/images/tennis.png";
 
 export default function MainPage() {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -31,26 +33,29 @@ export default function MainPage() {
         </button>
       </div>
 
-      {/* 프로그램 리스트 , 사진 미설정*/}
+      {/* 프로그램 리스트 */}
       <div className="w-11/12 space-y-2">
+        {/* 배드민턴 */}
         <div className="flex items-center bg-gray-200 rounded-lg p-4">
-          <img src="/" alt="배드민턴" className="w-10 h-10 mr-4" />
+          <img src={badmintonImage} alt="배드민턴" className="w-10 h-10 mr-4" />
           <div className="flex-1">
             <p className="text-sm font-semibold">배드민턴</p>
             <p className="text-xs text-gray-600">000체육관 (1.2km)</p>
           </div>
           <span className="text-lg text-gray-600">➔</span>
         </div>
+        {/* 축구 */}
         <div className="flex items-center bg-gray-200 rounded-lg p-4">
-          <img src="/" alt="축구" className="w-10 h-10 mr-4" />
+          <img src={soccerImage} alt="축구" className="w-10 h-10 mr-4" />
           <div className="flex-1">
             <p className="text-sm font-semibold">축구</p>
             <p className="text-xs text-gray-600">000체육관 (1.2km)</p>
           </div>
           <span className="text-lg text-gray-600">➔</span>
         </div>
+        {/* 테니스 */}
         <div className="flex items-center bg-gray-200 rounded-lg p-4">
-          <img src="/" alt="테니스" className="w-10 h-10 mr-4" />
+          <img src={tennisImage} alt="테니스" className="w-10 h-10 mr-4" />
           <div className="flex-1">
             <p className="text-sm font-semibold">테니스</p>
             <p className="text-xs text-gray-600">000체육관 (1.2km)</p>
