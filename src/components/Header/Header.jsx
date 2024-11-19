@@ -78,7 +78,7 @@ export default function Header() {
             }}
           >
             <FontAwesomeIcon icon={faAngleLeft} /> {/* 왼쪽 화살표 아이콘 */}
-            <div className="header-text">검색</div> {/* 버튼 텍스트 */}
+            <div className="header-text"> </div> {/* 버튼 텍스트 */}
           </NavLink>
         </div>
       ) : (
