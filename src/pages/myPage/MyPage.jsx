@@ -3,7 +3,7 @@ import React from "react";
 export default function MyPage() {
   const userInfo = {
     name: "홍길동",
-    membershipLevel: "프리미엄 회원",
+    membershipLevel: "일반 회원",
     balance: "10회",
     favoritePlaces: ["광운체육관", "서울스포츠센터"],
     registeredPrograms: ["배드민턴", "축구"],

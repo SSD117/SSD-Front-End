@@ -68,7 +68,7 @@ export default function Navbar() {
 
       <div>
         <NavLink
-          to="/page4"
+          to="/login"
           className={({ isActive }) =>
             isActive ? "nav-link active" : "nav-link"
           }
