@@ -14,19 +14,19 @@ export default function MainPage() {
   };
 
   // 상세 페이지로 이동하는 함수
-  const goToDetailPage = (program) => {
-    navigate(`/details/${program}`); // URL에 프로그램 이름을 전달
+  const goToDetailPage = () => {
+    navigate(`/detail`); // URL에 프로그램 이름을 전달
   };
 
   return (
     <div className="main-page bg-gray-100 min-h-screen flex flex-col items-center">
       <header className="mt-8 text-center">
-        <p className="text-lg font-semibold">내 위치 : 광운초등학교</p>
+        <p className="text-lg font-semibold">내 학교: 광운초등학교</p>
       </header>
 
       {/* 지도 Placeholder */}
       <div className="w-11/12 h-48 bg-gray-300 my-4 flex items-center justify-center text-lg font-semibold text-gray-600">
-        지도 영역 div
+        AI추천 이동 베너 div
       </div>
 
       {/* 프로그램 섹션 */}
