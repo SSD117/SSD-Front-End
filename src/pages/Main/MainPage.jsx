@@ -31,7 +31,7 @@ export default function MainPage() {
   ];
 
   return (
-    <div className="main-page bg-gray-100 min-h-screen flex flex-col items-center">
+    <div className="main-page bg-white min-h-screen flex flex-col items-center">
       <header className="mt-8 text-center">
         <p className="text-lg font-semibold">내 학교: 광운초등학교</p>
       </header>
