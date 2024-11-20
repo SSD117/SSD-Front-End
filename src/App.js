@@ -20,6 +20,7 @@ import SignUp1 from "./pages/SignUp_1";
 import SignUp2 from "./pages/SignUp_2";
 import Splash from "./pages/Splash";
 import Detail from "./pages/Detail";
+import Question from "./pages/Question";
 
 const Layout = () => (
   <div className="page">
@@ -50,6 +51,7 @@ function App() {
           <Route path="/signUp2" element={<SignUp2 />} />
           <Route path="/splash" element={<Splash />} />
           <Route path="/detail" element={<Detail />} />
+          <Route path="/question" element={<Question />} />
         </Route>
       </Routes>
     </Router>
