@@ -76,7 +76,7 @@ export default function MainPage() {
       <div className="w-11/12 space-y-2">
         {/* 배드민턴 */}
         <div
-          className="flex items-center bg-gray-200 rounded-lg p-4 cursor-pointer"
+          className="flex items-center bg-gray-100 shadow-md rounded-lg p-4 cursor-pointer"
           onClick={() => navigate(`/detail`)}
         >
           <img src={badmintonImage} alt="배드민턴" className="w-10 h-10 mr-4" />
@@ -88,7 +88,7 @@ export default function MainPage() {
         </div>
         {/* 축구 */}
         <div
-          className="flex items-center bg-gray-200 rounded-lg p-4 cursor-pointer"
+          className="flex items-center bg-gray-100 shadow-md rounded-lg p-4 cursor-pointer"
           onClick={() => navigate(`/detail`)}
         >
           <img src={soccerImage} alt="축구" className="w-10 h-10 mr-4" />
@@ -100,7 +100,7 @@ export default function MainPage() {
         </div>
         {/* 테니스 */}
         <div
-          className="flex items-center bg-gray-200 rounded-lg p-4 cursor-pointer"
+          className="flex items-center bg-gray-100 shadow-md rounded-lg p-4 cursor-pointer"
           onClick={() => navigate(`/detail`)}
         >
           <img src={tennisImage} alt="테니스" className="w-10 h-10 mr-4" />
