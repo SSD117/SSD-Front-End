@@ -27,7 +27,7 @@ export default function MainPage() {
   // 배너 데이터
   const banners = [
     { src: banner1, link: "https://svoucher.kspo.or.kr/main.do" },
-    { src: banner2, link: "/quetion" },
+    { src: banner2, link: "/question" },
   ];
 
   return (
