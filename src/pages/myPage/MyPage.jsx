@@ -3,7 +3,7 @@ import React from "react";
 export default function MyPage() {
   const userInfo = {
     name: "홍길동",
-    membershipLevel: "일반 회원",
+    mySchool: "일반 회원",
     balance: "10회",
     favoritePlaces: ["광운체육관", "서울스포츠센터"],
     registeredPrograms: ["배드민턴", "축구"],
@@ -20,7 +20,7 @@ export default function MyPage() {
       <section className="bg-white rounded-lg shadow p-4 mb-4">
         <h2 className="text-lg font-semibold text-main01 mb-2">회원 정보</h2>
         <p>이름: {userInfo.name}</p>
-        <p>등급: {userInfo.membershipLevel}</p>
+        <p>학교: {userInfo.mySchool}</p>
         <button className="mt-2 px-4 py-2 bg-main01 text-white rounded-md hover:bg-main01-light">
           개인정보 수정
         </button>
