@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function MyPage() {
+  const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState({
     name: "홍길동",
     mySchool: "광운초등학교",
@@ -9,6 +11,18 @@ export default function MyPage() {
     registeredPrograms: ["배드민턴", "축구"],
     recommendedExercises: ["테니스", "농구"],
   });
+
+  const handleRemoveFavoritePlace = (place) => {
+    const confirmDelete = window.confirm(
+      `${place}을(를) 즐겨찾기에서 삭제하시겠습니까?`
+    );
+    if (confirmDelete) {
+      setUserInfo((prev) => ({
+        ...prev,
+        favoritePlaces: prev.favoritePlaces.filter((p) => p !== place),
+      }));
+    }
+  };
 
   const handleRemoveProgram = (program) => {
     const confirmDelete = window.confirm(
@@ -26,6 +40,10 @@ export default function MyPage() {
 
   const handleViewPassesForExercise = (exercise) => {
     alert(`${exercise} 관련 수강권을 확인합니다.`);
+  };
+
+  const handleGoToSurvey = () => {
+    navigate("/question");
   };
 
   return (
@@ -54,9 +72,20 @@ export default function MyPage() {
       {/* 즐겨찾기한 운동 장소 */}
       <section className="bg-white rounded-lg shadow-md p-6">
         <h2 className="text-lg font-semibold text-main01 mb-3">즐겨찾기한 운동 장소</h2>
-        <ul className="list-disc list-inside space-y-2 text-gray-700">
+        <ul className="space-y-3">
           {userInfo.favoritePlaces.map((place, index) => (
-            <li key={index}>{place}</li>
+            <li
+              key={index}
+              className="flex justify-between items-center bg-gray-100 p-3 rounded-md"
+            >
+              <span>{place}</span>
+              <button
+                className="px-3 py-1 text-xs bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
+                onClick={() => handleRemoveFavoritePlace(place)}
+              >
+                삭제
+              </button>
+            </li>
           ))}
         </ul>
       </section>
@@ -101,6 +130,14 @@ export default function MyPage() {
             </li>
           ))}
         </ul>
+        <div className="mt-4 text-center">
+          <button
+            className="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition"
+            onClick={handleGoToSurvey}
+          >
+            설문조사하기
+          </button>
+        </div>
       </section>
     </div>
   );

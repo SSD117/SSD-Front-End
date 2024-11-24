@@ -33,16 +33,6 @@ export default function Navbar() {
         </NavLink>
       </div>
 
-      <div>
-        <NavLink
-          to="/page1"
-          className={({ isActive }) =>
-            isActive ? "nav-link active" : "nav-link"
-          }
-        >
-          <FontAwesomeIcon icon={faCamera} />
-        </NavLink>
-      </div>
 
       <div>
         <NavLink

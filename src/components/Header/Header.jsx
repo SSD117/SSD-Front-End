@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react"; 
 import { faAngleLeft, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NavLink, useLocation, useNavigate, useParams } from "react-router-dom";
@@ -62,6 +62,9 @@ export default function Header() {
     }
   }, [showBackButton]);
 
+  // 로그인 페이지에서는 검색 아이콘을 숨김
+  const hideSearchIcon = location.pathname === "/login";
+
   return (
     <div className={`header ${isVisible ? "visible" : "hidden"}`}>
       {/* 뒤로 가기 버튼을 표시할 경로에서만 보여주기 */}
@@ -90,16 +93,19 @@ export default function Header() {
           style={{ cursor: "pointer" }} // 클릭 가능한 상태임을 나타내는 스타일 추가
         />
       )}
-      <div className="icon-search">
-        <NavLink
-          to="/search" // 검색 페이지로 이동하는 링크
-          className={({ isActive }) =>
-            isActive ? "nav-link active" : "nav-link"
-          }
-        >
-          <FontAwesomeIcon icon={faMagnifyingGlass} /> {/* 돋보기 아이콘 */}
-        </NavLink>
-      </div>
+      {/* 로그인 페이지에서는 검색 아이콘을 숨깁니다 */}
+      {!hideSearchIcon && (
+        <div className="icon-search">
+          <NavLink
+            to="/search" // 검색 페이지로 이동하는 링크
+            className={({ isActive }) =>
+              isActive ? "nav-link active" : "nav-link"
+            }
+          >
+            <FontAwesomeIcon icon={faMagnifyingGlass} /> {/* 돋보기 아이콘 */}
+          </NavLink>
+        </div>
+      )}
     </div>
   );
 }
