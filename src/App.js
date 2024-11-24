@@ -7,8 +7,7 @@ import Navbar from "./components/Navbar/Navbar";
 
 import SplashPage from "./pages/Main/SplashPage";
 import MainPage from "./pages/Main/MainPage";
-import Page1 from "./pages/Page1/Page1";
-import Page2 from "./pages/Page2/Page2";
+import SocialPage from "./pages/Social/SocialPage";
 import MyPage from "./pages/myPage/MyPage";
 import SearchPage from "./pages/Search/SearchPage";
 
@@ -38,8 +37,7 @@ function App() {
         <Route element={<Layout />}>
           <Route path="/" element={<SplashPage />} />
           <Route path="/MainPage" element={<MainPage />} />
-          <Route path="/page1" element={<Page1 />} />
-          <Route path="/page2" element={<Page2 />} />
+          <Route path="/SocialPage" element={<SocialPage />} />
           <Route path="/search" element={<SearchPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/main" element={<Main />} />
