@@ -29,6 +29,7 @@ export default function MainPage() {
     { src: banner1, link: "https://svoucher.kspo.or.kr/main.do" },
     { src: banner2, link: "/question" },
   ];
+  
 
   return (
     <div className="main-page bg-white min-h-screen flex flex-col items-center">
