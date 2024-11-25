@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; // useNavigate import
+import { useNavigate } from "react-router-dom";
 import FilterModal from "./FilterModal";
 import badmintonImage from "../../assets/images/badminton.png";
 import soccerImage from "../../assets/images/soccer.png";
@@ -9,7 +9,7 @@ import banner2 from "../../assets/images/banner2.png";
 
 export default function MainPage() {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
-  const [currentBanner, setCurrentBanner] = useState(0); // 현재 보여지는 배너 인덱스
+  const [currentBanner, setCurrentBanner] = useState(0);
   const navigate = useNavigate();
 
   const toggleFilter = () => {
@@ -19,9 +19,9 @@ export default function MainPage() {
   // 배너 전환 로직
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentBanner((prev) => (prev === 0 ? 1 : 0)); // 배너 0과 1을 반복
-    }, 2500); // 2초마다 변경
-    return () => clearInterval(interval); // 컴포넌트 언마운트 시 클리어
+      setCurrentBanner((prev) => (prev === 0 ? 1 : 0));
+    }, 2500); 
+    return () => clearInterval(interval);
   }, []);
 
   // 배너 데이터
@@ -29,17 +29,15 @@ export default function MainPage() {
     { src: banner1, link: "https://svoucher.kspo.or.kr/main.do" },
     { src: banner2, link: "/question" },
   ];
-  
 
   return (
     <div className="main-page bg-white min-h-screen flex flex-col items-center">
-      <header className="mt-8 text-center">
-        <p className="text-lg font-semibold">내 학교: 광운초등학교</p>
-      </header>
+      {/* 학교 정보 섹션 */}
+      <div className="w-11/12 bg-gray-100 rounded-lg p-4 mt-4 text-center">
+        <p className="text-lg font-semibold">내 학교 : 광운중학교</p>
+      </div>
 
-      {/* 지도 Placeholder */}
       <div className="relative w-11/12 h-48 overflow-hidden my-4">
-        {/* 배너 이미지 */}
         <div
           className="flex transition-transform duration-500 ease-in-out"
           style={{ transform: `translateX(-${currentBanner * 100}%)` }}
@@ -61,6 +59,14 @@ export default function MainPage() {
           ))}
         </div>
       </div>
+
+      {/* 나에게 맞는 운동 찾기 버튼 */}
+      <button
+        className="text-white bg-main01 rounded-lg px-28 py-2 my-4"
+        onClick={() => navigate(`/question`)}
+      >
+        나에게 맞는 운동 찾기
+      </button>
 
       {/* 프로그램 섹션 */}
       <div className="w-11/12 flex justify-between items-center my-2">
