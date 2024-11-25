@@ -103,7 +103,9 @@ const Detail = () => {
                   <FontAwesomeIcon
                     icon={favorites.includes(course.title) ? solidHeart : regularHeart}
                     className={`${
-                      favorites.includes(course.title) ? "text-red-500" : "text-gray-400"
+                      favorites.includes(course.title)
+                        ? "text-red-500"
+                        : "text-gray-400"
                     }`}
                   />
                 </button>
@@ -121,9 +123,21 @@ const Detail = () => {
             <p className="text-sm text-gray-700 mb-1">요일 : {course.days}</p>
             <p className="text-sm text-gray-700 mb-1">시간 : {course.time}</p>
             <p className="text-sm text-gray-700 mb-1">수강료 : {course.price}</p>
-            <p className="text-sm text-gray-700 mb-3">
-              수강 기간 : {course.period}
-            </p>
+            <p className="text-sm text-gray-700 mb-3">수강 기간 : {course.period}</p>
+
+            {/* 신청하기 버튼 */}
+            <div className="mt-4">
+              <button
+                className={`w-full px-4 py-2 text-white font-bold rounded ${
+                  course.status === "접수중"
+                    ? "bg-main01 hover:bg-main02"
+                    : "bg-gray-400 cursor-not-allowed"
+                }`}
+                disabled={course.status !== "접수중"}
+              >
+                신청하기
+              </button>
+            </div>
           </div>
         ))}
       </div>
