@@ -22,7 +22,7 @@ export default function Login() {
       id="email"
       placeholder="이메일을 입력하세요"
       required
-      className="p-3 mb-4 w-full text-sm border border-gray-300 rounded focus:outline-none focus:border-main01"
+      className="p-3 mb-4 w-full bg-gray-200 text-sm border border-gray-300 rounded focus:outline-none focus:border-main01"
     />
 
     <label htmlFor="password" className="text-sm text-gray-600 w-full mb-2 block">
@@ -33,13 +33,13 @@ export default function Login() {
       id="password"
       placeholder="비밀번호를 입력하세요"
       required
-      className="p-3 mb-4 w-full text-sm border border-gray-300 rounded focus:outline-none focus:border-main01"
+      className="p-3 mb-4 w-full bg-gray-200 text-sm border border-gray-300 rounded focus:outline-none focus:border-main01"
     />
   </div>
 
   <button
     type="submit"
-    className="p-3 mb-4 w-full max-w-md text-lg text-white bg-main01 border border-main01 rounded shadow-md hover:shadow-lg transition-shadow"
+    className="p-3 mb-4 w-full max-w-md  text-lg text-white bg-main01 border border-main01 rounded shadow-md hover:shadow-lg transition-shadow"
   >
     로그인
   </button>
