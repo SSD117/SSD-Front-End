@@ -32,9 +32,7 @@ export default function MainPage() {
     풋살: footballImage,
     헬스: gymImage,
     요가및필라테스: yogaImage,
-    기본: basicImage, // 기본 이미지
   };
-  
 
   const toggleFilter = () => {
     setIsFilterOpen(!isFilterOpen);
@@ -139,15 +137,16 @@ export default function MainPage() {
             className="flex items-center bg-gray-100 shadow-md rounded-lg p-4 cursor-pointer"
             onClick={() => navigate(`/detail/${sport.sport_id}`)}
           >
+            {/* 기본 이미지 처리 */}
             <img
-              src={sportImages[sport.exercise]}
-              alt={sport.exercise}
+              src={sportImages[sport.exercise] || basicImage} // 매핑되지 않은 경우 기본 이미지
+              alt={sport.exercise || "기본 운동"}
               className="w-10 h-10 mr-4"
             />
             <div className="flex-1">
-              <p className="text-sm font-semibold">{sport.exercise}</p>
+              <p className="text-sm font-semibold">{sport.exercise || "알 수 없는 운동"}</p>
               <p className="text-xs text-gray-600">
-                {sport.program_name} ({sport.distance.toFixed(2)}km)
+                {sport.program_name || "프로그램 정보 없음"} ({sport.distance?.toFixed(2) || "0.00"}km)
               </p>
             </div>
             <span className="text-lg text-gray-600">➔</span>
@@ -160,5 +159,3 @@ export default function MainPage() {
     </div>
   );
 }
-
-
