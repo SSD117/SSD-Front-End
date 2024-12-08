@@ -4,7 +4,6 @@ import FilterModal from "./FilterModal";
 import badmintonImage from "../../assets/images/badminton.png";
 import soccerImage from "../../assets/images/soccer.png";
 import tennisImage from "../../assets/images/tennis.png";
-
 import basketballImage from "../../assets/images/basketball.png";
 import swimmingImage from "../../assets/images/swimming.png";
 import footballImage from "../../assets/images/football.png";
@@ -21,6 +20,12 @@ export default function MainPage() {
   const [currentBanner, setCurrentBanner] = useState(0);
   const [mySchool, setMySchool] = useState("");
   const [sports, setSports] = useState([]);
+  const [filteredSports, setFilteredSports] = useState([]);
+  const [filterOptions, setFilterOptions] = useState({
+    selectedType: "",
+    selectedDistance: "",
+    selectedTime: "",
+  });
   const navigate = useNavigate();
 
   const sportImages = {
@@ -66,6 +71,7 @@ export default function MainPage() {
       try {
         const { data } = await api.getSports(); // API 호출
         setSports(data.sports); // 상태 업데이트
+        setFilteredSports(data.sports); // 필터링된 데이터 초기화
       } catch (error) {
         console.error("Error fetching sports data:", error);
       }
@@ -73,6 +79,27 @@ export default function MainPage() {
 
     fetchSports();
   }, []);
+
+  // 필터 적용
+  const applyFilters = (filters) => {
+    setFilterOptions(filters);
+
+    // 필터링 로직
+    const filtered = sports.filter((sport) => {
+      const matchesType =
+        !filters.selectedType || sport.exercise === filters.selectedType;
+      const matchesDistance =
+        !filters.selectedDistance ||
+        parseFloat(sport.distance) <= parseFloat(filters.selectedDistance);
+      const matchesTime =
+        !filters.selectedTime || sport.time === filters.selectedTime;
+
+      return matchesType && matchesDistance && matchesTime;
+    });
+
+    setFilteredSports(filtered);
+    setIsFilterOpen(false); // 필터 모달 닫기
+  };
 
   // 배너 데이터
   const banners = [
@@ -131,7 +158,7 @@ export default function MainPage() {
 
       {/* 프로그램 리스트 */}
       <div className="w-11/12 space-y-2">
-        {sports.map((sport, index) => (
+        {filteredSports.map((sport, index) => (
           <div
             key={index}
             className="flex items-center bg-gray-100 shadow-md rounded-lg p-4 cursor-pointer"
@@ -155,7 +182,12 @@ export default function MainPage() {
       </div>
 
       {/* 필터 모달 */}
-      <FilterModal isOpen={isFilterOpen} toggleFilter={toggleFilter} />
+      <FilterModal
+        isOpen={isFilterOpen}
+        toggleFilter={toggleFilter}
+        filterOptions={filterOptions}
+        onFilterChange={applyFilters}
+      />
     </div>
   );
 }
