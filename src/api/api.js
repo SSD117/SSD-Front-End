@@ -1,7 +1,6 @@
 import axios from "axios";
 
-// const BASE_URL = "http://158.180.80.145:3001"; // 백엔드 URL
-const BASE_URL = "http://localhost:3001"; // 백엔드 URL
+const BASE_URL = process.env.BACKEND_URL || "http://localhost:3001"; // 백엔드 URL
 
 const apiClient = axios.create({
   baseURL: BASE_URL,
@@ -34,8 +33,7 @@ const api = {
 
   // Class API
   getMyClasses: () => apiClient.get("/class"),
-  registerClass: (classId) =>
-    apiClient.post(`/class`, { params: { class_id: classId } }),
+  registerClass: (classId) => apiClient.post(`/class`, { class_id: classId }),
   cancelClass: (classId) =>
     apiClient.delete(`/class`, { params: { class_id: classId } }),
 

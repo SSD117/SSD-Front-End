@@ -65,7 +65,13 @@ export default function MyPage() {
       try {
         const { data } = await api.getAIRecommendation(); // 사용자 정보 가져오기
         console.log(data.sports);
-        setRecommendedExercises(data.sports);
+
+        // recommendedExercises가 배열인지 확인하고, 배열이 아니면 빈 배열로 설정
+        if (Array.isArray(data.sports)) {
+          setRecommendedExercises(data.sports);
+        } else {
+          setRecommendedExercises([]); // 배열이 아니면 빈 배열로 설정
+        }
       } catch (error) {
         console.error("Error fetching sports data:", error);
       }

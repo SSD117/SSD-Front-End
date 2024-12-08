@@ -21,7 +21,12 @@ const Detail = () => {
     const fetchSportDetails = async () => {
       try {
         const { data } = await api.getSportDetail(sport_id); // API 호출
-        setSportDetails(data.sports); // 상태 업데이트
+        // 각 클래스에 isRegistered 상태 추가
+        const updatedSports = data.sports.map((course) => ({
+          ...course,
+          isRegistered: false, // 초기 상태에서는 모두 등록되지 않음
+        }));
+        setSportDetails(updatedSports); // 상태 업데이트
         console.log(data.sports);
       } catch (error) {
         console.error("Error fetching sports data:", error);
@@ -29,7 +34,7 @@ const Detail = () => {
     };
 
     fetchSportDetails();
-  }, []);
+  }, [sport_id]);
 
   const toggleFilter = () => {
     setShowFilter((prev) => !prev);
@@ -56,12 +61,26 @@ const Detail = () => {
     }
   };
 
-  const handleFavoriteToggle = (courseTitle) => {
-    if (favorites.includes(courseTitle)) {
-      setFavorites(favorites.filter((title) => title !== courseTitle));
+  const handleFavoriteToggle = (classId) => {
+    if (favorites.includes(classId)) {
+      setFavorites(favorites.filter((id) => id !== classId));
     } else {
-      setFavorites([...favorites, courseTitle]);
+      setFavorites([...favorites, classId]);
     }
+  };
+
+  const handleRegisterClassToggle = async (classId) => {
+    // 등록 처리 API 호출
+    await api.registerClass(classId);
+
+    // 등록된 클래스를 업데이트하여 버튼 비활성화
+    setSportDetails((prevDetails) =>
+      prevDetails.map((course) =>
+        course.class_id === classId
+          ? { ...course, isRegistered: true } // 등록된 클래스는 isRegistered true로 업데이트
+          : course
+      )
+    );
   };
 
   return (
@@ -85,33 +104,6 @@ const Detail = () => {
         </button>
       </div>
 
-      {/* [
-          {
-            title: "너랑나랑라인댄스",
-            day: "월, 수, 금",
-            time: "15:00 ~ 15:50",
-            price: "36,000",
-            period: "2024년 12월 4일 ~ 12월 19일",
-            status: "접수중",
-          },
-          {
-            title: "케이팝 댄스",
-            day: "화, 목",
-            time: "15:00 ~ 15:50",
-            price: "36,000",
-            period: "2024년 12월 4일 ~ 12월 19일",
-            status: "접수중",
-          },
-          {
-            title: "너랑나랑라인댄스3",
-            day: "목, 금",
-            time: "15:00 ~ 15:50",
-            price: "36,000",
-            period: "2024년 12월 4일 ~ 12월 19일",
-            status: "접수전",
-          },
-        ] */}
-
       {/* 강좌 정보 */}
       <div className="space-y-4">
         {sportDetails.map((course, index) => (
@@ -120,7 +112,7 @@ const Detail = () => {
               <h2 className="font-bold text-lg">{course.program_name}</h2>
               <div className="flex items-center space-x-2">
                 <button
-                  onClick={() => handleFavoriteToggle(course.title)}
+                  onClick={() => handleFavoriteToggle(course.class_id)}
                   className="text-2xl focus:outline-none"
                 >
                   <FontAwesomeIcon
@@ -137,11 +129,7 @@ const Detail = () => {
                   />
                 </button>
                 <button
-                  className={`px-4 py-2 text-white text-sm rounded ${
-                    course.status === "접수중"
-                      ? "bg-main01"
-                      : "bg-gray-400 cursor-not-allowed"
-                  }`}
+                  className={`px-4 py-2 text-white text-sm rounded ${"bg-main01"}`}
                 >
                   {course.status}
                 </button>
@@ -159,14 +147,15 @@ const Detail = () => {
             {/* 신청하기 버튼 */}
             <div className="mt-4">
               <button
+                onClick={() => handleRegisterClassToggle(course.class_id)}
+                disabled={course.isRegistered} // 등록된 경우 버튼 비활성화
                 className={`w-full px-4 py-2 text-white font-bold rounded ${
-                  course.status === "접수중"
-                    ? "bg-main01 hover:bg-main02"
-                    : "bg-gray-400 cursor-not-allowed"
+                  course.isRegistered
+                    ? "bg-gray-400 cursor-not-allowed"
+                    : "bg-main01 hover:bg-main02"
                 }`}
-                disabled={course.status !== "접수중"}
               >
-                신청하기
+                {course.isRegistered ? "신청 완료" : "신청하기"}
               </button>
             </div>
           </div>
