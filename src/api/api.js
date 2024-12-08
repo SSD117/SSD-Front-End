@@ -1,8 +1,8 @@
 import axios from "axios";
-import configDotenv from "dotenv";
 
 configDotenv.config();
-const BASE_URL = process.env.BACKEND_URL || "http://localhost:3001"; // 백엔드 URL
+const BASE_URL = "http://backend:3001"; // 백엔드 URL
+// const BASE_URL = process.env.BACKEND_URL || "http://localhost:3001"; // 백엔드 URL
 
 const apiClient = axios.create({
   baseURL: BASE_URL,
