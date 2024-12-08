@@ -1,5 +1,7 @@
 import axios from "axios";
+import dotenv from "dotenv";
 
+configDotenv.config();
 const BASE_URL = process.env.BACKEND_URL || "http://localhost:3001"; // 백엔드 URL
 
 const apiClient = axios.create({
@@ -8,7 +10,7 @@ const apiClient = axios.create({
     "Content-Type": "application/json",
   },
   // timeout: 10000,
-  withCredentials: true, // 쿠키를 포함한 요청을 보낼 수 있도록 설정
+  // withCredentials: true, // 쿠키를 포함한 요청을 보낼 수 있도록 설정
 });
 
 const api = {
