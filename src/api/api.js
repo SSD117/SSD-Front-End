@@ -35,14 +35,14 @@ const api = {
   getMyClasses: () => apiClient.get("/class"),
   registerClass: (classId) => apiClient.post(`/class`, { class_id: classId }),
   cancelClass: (classId) =>
-    apiClient.delete(`/class`, { params: { class_id: classId } }),
+    apiClient.delete(`/class`, { data: { class_id: classId } }),
 
   // Bookmark API
   getMyBookmark: () => apiClient.get("/class/bookmark"),
   registerBookmark: (classId) =>
-    apiClient.post(`/class/bookmark`, { params: { class_id: classId } }),
+    apiClient.post(`/class/bookmark`, { class_id: classId }),
   cancelBookmark: (classId) =>
-    apiClient.delete(`/class/bookmark`, { params: { class_id: classId } }),
+    apiClient.delete(`/class/bookmark`, { data: { class_id: classId } }),
 };
 
 export default api;

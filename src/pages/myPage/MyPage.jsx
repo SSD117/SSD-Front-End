@@ -136,7 +136,7 @@ export default function MyPage() {
   };
 
   const handleViewPassesForExercise = (exercise) => {
-    alert(`${exercise} 관련 수강권을 확인합니다.`);
+    alert(`${exercise} 메인페이지에서 수강권을 확인해보세요!`);
   };
 
   const handleGoToSurvey = () => {
