@@ -1,14 +1,13 @@
 import axios from "axios";
 
-const BASE_URL = "http://backend:3001"; // 백엔드 URL
-// const BASE_URL = process.env.BACKEND_URL || "http://localhost:3001"; // 백엔드 URL
+const BASE_URL = process.env.BACKEND_URL || "http://localhost:3001"; // 백엔드 URL
 
 const apiClient = axios.create({
   baseURL: BASE_URL,
   headers: {
     "Content-Type": "application/json",
   },
-  // timeout: 10000,
+  timeout: 3000,
   withCredentials: true, // 쿠키를 포함한 요청을 보낼 수 있도록 설정
 });
 
