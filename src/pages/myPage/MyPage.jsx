@@ -43,7 +43,7 @@ export default function MyPage() {
       }
     };
     fetchData();
-  }, [navigate]);
+  }, []);
 
   // 신청한 스포츠 프로그램 가져오기
   useEffect(() => {
@@ -57,7 +57,21 @@ export default function MyPage() {
       }
     };
     fetchData();
-  }, [navigate]);
+  }, []);
+
+  // AI 운동 추천 결과 조회
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await api.getAIRecommendation(); // 사용자 정보 가져오기
+        console.log(data.sports);
+        setRecommendedExercises(data.sports);
+      } catch (error) {
+        console.error("Error fetching sports data:", error);
+      }
+    };
+    fetchData();
+  }, []);
 
   const handleEditToggle = () => {
     setIsEditing(!isEditing);
@@ -250,7 +264,7 @@ export default function MyPage() {
       <section className="bg-white rounded-lg shadow-md p-6">
         <h2 className="text-lg font-semibold text-main01 mb-3">AI 추천 운동</h2>
         <ul className="space-y-3">
-          {userInfo.recommendedExercises?.map((exercise, index) => (
+          {recommendedExercises?.map((exercise, index) => (
             <li
               key={index}
               className="flex justify-between items-center bg-gray-100 px-3 py-2  rounded-md"

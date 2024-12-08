@@ -29,6 +29,8 @@ const api = {
   getSportDetail: (sportId) => apiClient.get(`/sport/detail/${sportId}`),
   getAIRecommendation: () => apiClient.get("/sport/ai"),
   submitSurvey: (surveyData) => apiClient.post("/sport/ai", surveyData),
+  getSportByAIRecommend: (exercise) =>
+    apiClient.get("/sport", { params: { exercise } }),
 
   // Class API
   getMyClasses: () => apiClient.get("/class"),
