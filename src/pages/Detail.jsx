@@ -1,24 +1,45 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
+import api from "../api/api";
 
 const Detail = () => {
   const [showFilter, setShowFilter] = useState(false);
-  const [selectedDays, setSelectedDays] = useState([]);
+  const [selectedDay, setSelectedDay] = useState([]);
   const [priceRange, setPriceRange] = useState([50000, 80000]);
   const [favorites, setFavorites] = useState([]);
   const [selectedStatus, setSelectedStatus] = useState("");
+  const [sportDetails, setSportDetails] = useState([]);
+
+  // URL 매개변수에서 sport_id 받기
+  const { sport_id } = useParams();
+
+  // 프로그램 데이터 가져오기
+  useEffect(() => {
+    const fetchSportDetails = async () => {
+      try {
+        const { data } = await api.getSportDetail(sport_id); // API 호출
+        setSportDetails(data.sports); // 상태 업데이트
+        console.log(data.sports);
+      } catch (error) {
+        console.error("Error fetching sports data:", error);
+      }
+    };
+
+    fetchSportDetails();
+  }, []);
 
   const toggleFilter = () => {
     setShowFilter((prev) => !prev);
   };
 
   const handleDayClick = (day) => {
-    if (selectedDays.includes(day)) {
-      setSelectedDays(selectedDays.filter((d) => d !== day));
+    if (selectedDay.includes(day)) {
+      setSelectedDay(selectedDay.filter((d) => d !== day));
     } else {
-      setSelectedDays([...selectedDays, day]);
+      setSelectedDay([...selectedDay, day]);
     }
   };
 
@@ -64,12 +85,10 @@ const Detail = () => {
         </button>
       </div>
 
-      {/* 강좌 정보 */}
-      <div className="space-y-4">
-        {[
+      {/* [
           {
             title: "너랑나랑라인댄스",
-            days: "월, 수, 금",
+            day: "월, 수, 금",
             time: "15:00 ~ 15:50",
             price: "36,000",
             period: "2024년 12월 4일 ~ 12월 19일",
@@ -77,7 +96,7 @@ const Detail = () => {
           },
           {
             title: "케이팝 댄스",
-            days: "화, 목",
+            day: "화, 목",
             time: "15:00 ~ 15:50",
             price: "36,000",
             period: "2024년 12월 4일 ~ 12월 19일",
@@ -85,23 +104,31 @@ const Detail = () => {
           },
           {
             title: "너랑나랑라인댄스3",
-            days: "목, 금",
+            day: "목, 금",
             time: "15:00 ~ 15:50",
             price: "36,000",
             period: "2024년 12월 4일 ~ 12월 19일",
             status: "접수전",
           },
-        ].map((course, index) => (
-          <div key={index} className="p-4 bg-gray-100 rounded-lg">
+        ] */}
+
+      {/* 강좌 정보 */}
+      <div className="space-y-4">
+        {sportDetails.map((course, index) => (
+          <div key={course.class_id} className="p-4 bg-gray-100 rounded-lg">
             <div className="flex justify-between items-center mb-2">
-              <h2 className="font-bold text-lg">{course.title}</h2>
+              <h2 className="font-bold text-lg">{course.program_name}</h2>
               <div className="flex items-center space-x-2">
                 <button
                   onClick={() => handleFavoriteToggle(course.title)}
                   className="text-2xl focus:outline-none"
                 >
                   <FontAwesomeIcon
-                    icon={favorites.includes(course.title) ? solidHeart : regularHeart}
+                    icon={
+                      favorites.includes(course.title)
+                        ? solidHeart
+                        : regularHeart
+                    }
                     className={`${
                       favorites.includes(course.title)
                         ? "text-red-500"
@@ -120,10 +147,14 @@ const Detail = () => {
                 </button>
               </div>
             </div>
-            <p className="text-sm text-gray-700 mb-1">요일 : {course.days}</p>
+            <p className="text-sm text-gray-700 mb-1">요일 : {course.day}</p>
             <p className="text-sm text-gray-700 mb-1">시간 : {course.time}</p>
-            <p className="text-sm text-gray-700 mb-1">수강료 : {course.price}</p>
-            <p className="text-sm text-gray-700 mb-3">수강 기간 : {course.period}</p>
+            <p className="text-sm text-gray-700 mb-1">
+              수강료 : {course.price}
+            </p>
+            <p className="text-sm text-gray-700 mb-3">
+              수강 기간 : {course.begin + "~" + course.end}
+            </p>
 
             {/* 신청하기 버튼 */}
             <div className="mt-4">
@@ -193,7 +224,7 @@ const Detail = () => {
                   key={index}
                   onClick={() => handleDayClick(day)}
                   className={`w-10 h-10 border rounded-full flex items-center justify-center ${
-                    selectedDays.includes(day)
+                    selectedDay.includes(day)
                       ? "bg-main01 text-white"
                       : "bg-gray-200 text-black border-gray-400"
                   }`}
@@ -241,7 +272,7 @@ const Detail = () => {
               className="bg-gray-200 text-black font-semibold rounded-lg px-6 py-2"
               onClick={() => {
                 setPriceRange([50000, 80000]);
-                setSelectedDays([]);
+                setSelectedDay([]);
                 setSelectedStatus("");
               }}
             >

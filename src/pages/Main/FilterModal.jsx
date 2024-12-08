@@ -21,7 +21,7 @@ export default function FilterModal({ isOpen, toggleFilter }) {
 
   return (
     <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-end z-50 px-4">
-      <div className="bg-white w-full max-w-sm rounded-t-2xl p-6 text-gray-800 transition-transform duration-300 transform translate-y-0">
+      <div className="bg-white w-full max-w-sm rounded-t-2xl p-6 text-gray-800 transition-transform duration-300 transform translate-y-0 min-h-[60vh]">
         <h3 className="text-lg font-semibold mb-4">거리</h3>
         <div className="flex flex-wrap gap-2 mb-4">
           {["1km", "3km", "5km", "7km"].map((distance) => (
@@ -41,19 +41,21 @@ export default function FilterModal({ isOpen, toggleFilter }) {
 
         <h3 className="text-lg font-semibold mb-4">유형</h3>
         <div className="flex flex-wrap gap-2 mb-4">
-          {["배드민턴", "축구", "테니스", "수영", "농구", "야구"].map((type) => (
-            <button
-              key={type}
-              onClick={() => handleTypeClick(type)}
-              className={`px-4 py-2 rounded-full ${
-                selectedType === type
-                  ? "bg-main01 text-white"
-                  : "bg-gray-200 text-black"
-              }`}
-            >
-              {type}
-            </button>
-          ))}
+          {["배드민턴", "축구", "테니스", "수영", "농구", "야구"].map(
+            (type) => (
+              <button
+                key={type}
+                onClick={() => handleTypeClick(type)}
+                className={`px-4 py-2 rounded-full ${
+                  selectedType === type
+                    ? "bg-main01 text-white"
+                    : "bg-gray-200 text-black"
+                }`}
+              >
+                {type}
+              </button>
+            )
+          )}
         </div>
 
         <h3 className="text-lg font-semibold mb-4">시간</h3>

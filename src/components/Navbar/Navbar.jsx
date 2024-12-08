@@ -33,18 +33,6 @@ export default function Navbar() {
         </NavLink>
       </div>
 
-
-      <div>
-        <NavLink
-          to="/SocialPage"
-          className={({ isActive }) =>
-            isActive ? "nav-link active" : "nav-link"
-          }
-        >
-          <FontAwesomeIcon icon={faUsers} />
-        </NavLink>
-      </div>
-
       <div>
         <NavLink
           to="/myPage"

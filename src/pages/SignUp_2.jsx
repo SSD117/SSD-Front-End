@@ -1,37 +1,66 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import api from "../api/api"; // API 모듈 가져오기
 
 const SignUp_2 = () => {
   const navigate = useNavigate();
-
-  const handleSignupClick = (e) => {
-    e.preventDefault();
-    navigate("/mainPage");
-  };
+  const location = useLocation(); // 이전 단계 데이터를 가져옴
+  const initialData = location.state || {}; // 이전 단계 데이터가 없으면 빈 객체 사용
 
   const [formData, setFormData] = useState({
+    ...initialData, // 이전 단계 데이터를 병합
     height: "",
     weight: "",
     experience: "",
-    interests: [],
+    exercies: [],
+    rating: "일반", // 기본 값으로 "일반" 설정
   });
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleChange = (name, value) => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleInterestToggle = (interest) => {
+  const handleInterestToggle = (exercise) => {
     setFormData((prevData) => {
-      const interests = prevData.interests.includes(interest)
-        ? prevData.interests.filter((item) => item !== interest)
-        : [...prevData.interests, interest];
-      return { ...prevData, interests };
+      const exercies = prevData.exercies.includes(exercise)
+        ? prevData.exercies.filter((item) => item !== exercise)
+        : [...prevData.exercies, exercise];
+      return { ...prevData, exercies };
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSignupClick = async (e) => {
     e.preventDefault();
-    console.log(formData);
+
+    // 입력 데이터 검증
+    if (!formData.height || isNaN(formData.height) || formData.height <= 0) {
+      setErrorMessage("유효한 키를 입력하세요.");
+      return;
+    }
+    if (!formData.weight || isNaN(formData.weight) || formData.weight <= 0) {
+      setErrorMessage("유효한 몸무게를 입력하세요.");
+      return;
+    }
+    if (!formData.experience) {
+      setErrorMessage("운동 경험을 선택하세요.");
+      return;
+    }
+    if (formData.exercies.length === 0) {
+      setErrorMessage("최소 하나의 관심사를 선택하세요.");
+      return;
+    }
+
+    try {
+      // API 호출
+      await api.register(formData);
+      alert("회원가입이 완료되었습니다!");
+      navigate("/login");
+    } catch (error) {
+      setErrorMessage(
+        error.response?.data?.message || "회원가입에 실패했습니다."
+      );
+    }
   };
 
   return (
@@ -39,8 +68,7 @@ const SignUp_2 = () => {
       <h2 className="text-center text-2xl font-semibold text-gray-800 mb-6">
         신체 정보 입력
       </h2>
-      <form onSubmit={handleSubmit} className="space-y-8">
-        
+      <form onSubmit={handleSignupClick} className="space-y-8">
         {/* 신체 정보 */}
         <div className="space-y-4">
           <h3 className="text-xl font-semibold text-main01 border-b-2 border-main01 pb-1">
@@ -70,9 +98,11 @@ const SignUp_2 = () => {
               />
             </div>
           </div>
-          
+
           <div>
-            <label className="block text-sm text-gray-600">운동 경험 유무</label>
+            <label className="block text-sm text-gray-600">
+              운동 경험 유무
+            </label>
             <div className="flex space-x-4">
               <button
                 type="button"
@@ -118,7 +148,7 @@ const SignUp_2 = () => {
                   type="button"
                   onClick={() => handleInterestToggle(interest)}
                   className={`p-3 mb-2 rounded ${
-                    formData.interests.includes(interest)
+                    formData.exercies.includes(interest)
                       ? "bg-main01 text-white"
                       : "bg-gray-200"
                   }`}
@@ -130,9 +160,10 @@ const SignUp_2 = () => {
           </div>
         </div>
 
+        {errorMessage && <p className="text-red-500 text-sm">{errorMessage}</p>}
+
         <button
           type="submit"
-          onClick={handleSignupClick}
           className="w-full p-3 text-white bg-main01 rounded cursor-pointer"
         >
           완료

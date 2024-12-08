@@ -1,5 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Outlet } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Outlet,
+} from "react-router-dom";
 import "./App.scss";
 
 import Header from "./components/Header/Header";
@@ -7,7 +12,6 @@ import Navbar from "./components/Navbar/Navbar";
 
 import SplashPage from "./pages/Main/SplashPage";
 import MainPage from "./pages/Main/MainPage";
-import SocialPage from "./pages/Social/SocialPage";
 import MyPage from "./pages/myPage/MyPage";
 import SearchPage from "./pages/Search/SearchPage";
 
@@ -37,7 +41,6 @@ function App() {
         <Route element={<Layout />}>
           <Route path="/" element={<SplashPage />} />
           <Route path="/MainPage" element={<MainPage />} />
-          <Route path="/SocialPage" element={<SocialPage />} />
           <Route path="/search" element={<SearchPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/main" element={<Main />} />
@@ -46,7 +49,7 @@ function App() {
           <Route path="/signUp1" element={<SignUp1 />} />
           <Route path="/signUp2" element={<SignUp2 />} />
           <Route path="/splash" element={<Splash />} />
-          <Route path="/detail" element={<Detail />} />
+          <Route path="/detail/:sport_id" element={<Detail />} />
           <Route path="/question" element={<Question />} />
         </Route>
       </Routes>

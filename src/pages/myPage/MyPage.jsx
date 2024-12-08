@@ -1,38 +1,83 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import api from "../../api/api"; // API 모듈 import
 
 export default function MyPage() {
   const navigate = useNavigate();
-  const [userInfo, setUserInfo] = useState({
-    name: "홍길동",
-    mySchool: "광운초등학교",
-    balance: "10회",
-    favoritePlaces: ["광운체육관", "서울스포츠센터"],
-    registeredPrograms: ["배드민턴", "축구"],
-    recommendedExercises: ["테니스", "농구"],
-  });
+  const [userInfo, setUserInfo] = useState();
+  const [favoritePlaces, setFavoritePlaces] = useState([]);
+  const [registeredPrograms, setRegisteredPrograms] = useState([]);
+  const [recommendedExercises, setRecommendedExercises] = useState([]);
 
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEditing, setIsEditing] = useState(false); // 수정 모드 여부
   const [editedInfo, setEditedInfo] = useState({
-    name: userInfo.name,
-    mySchool: userInfo.mySchool,
-  });
+    name: "",
+    school: "",
+  }); // 수정 중인 정보
+  const [errorMessage, setErrorMessage] = useState(""); // 에러 메시지 상태 관리
+
+  // 사용자 정보 가져오기
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await api.getUser(); // 사용자 정보 가져오기
+        console.log(data);
+        setUserInfo(data);
+      } catch (error) {
+        alert("로그인이 필요합니다. 로그인 페이지로 이동합니다.");
+        navigate("/login"); // 로그인 페이지로 리디렉션
+      }
+    };
+    fetchData();
+  }, [navigate]);
+
+  // 즐겨찾기한 운동 장소 가져오기
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await api.getMyBookmark(); // 사용자 정보 가져오기
+        console.log(data);
+        setFavoritePlaces(data);
+      } catch (error) {
+        console.error("Error fetching sports data:", error);
+      }
+    };
+    fetchData();
+  }, [navigate]);
+
+  // 신청한 스포츠 프로그램 가져오기
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await api.getMyClasses(); // 사용자 정보 가져오기
+        console.log(data);
+        setRegisteredPrograms(data);
+      } catch (error) {
+        console.error("Error fetching sports data:", error);
+      }
+    };
+    fetchData();
+  }, [navigate]);
 
   const handleEditToggle = () => {
     setIsEditing(!isEditing);
     setEditedInfo({
       name: userInfo.name,
-      mySchool: userInfo.mySchool,
+      school: userInfo.school,
     });
   };
 
-  const handleSaveEdit = () => {
-    setUserInfo((prev) => ({
-      ...prev,
-      name: editedInfo.name,
-      mySchool: editedInfo.mySchool,
-    }));
-    setIsEditing(false);
+  const handleSaveEdit = async () => {
+    try {
+      await api.updateUser(editedInfo); // 사용자 정보 업데이트 API 호출
+      setUserInfo((prev) => ({
+        ...prev,
+        ...editedInfo,
+      }));
+      setIsEditing(false); // 수정 모드 종료
+    } catch (error) {
+      setErrorMessage("정보 수정에 실패했습니다. 다시 시도해주세요.");
+    }
   };
 
   const handleChange = (e) => {
@@ -40,29 +85,33 @@ export default function MyPage() {
     setEditedInfo((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleRemoveFavoritePlace = (place) => {
+  const handleRemoveFavoritePlace = async (place) => {
     const confirmDelete = window.confirm(
-      `${place}을(를) 즐겨찾기에서 삭제하시겠습니까?`
+      `${place.class_name}을(를) 즐겨찾기에서 삭제하시겠습니까?`
     );
     if (confirmDelete) {
-      setUserInfo((prev) => ({
-        ...prev,
-        favoritePlaces: prev.favoritePlaces.filter((p) => p !== place),
-      }));
+      try {
+        await api.cancelBookmark(place.class_id); // 즐겨찾기 삭제 API 호출
+        setFavoritePlaces(favoritePlaces.filter((p) => p !== place));
+      } catch (error) {
+        alert("삭제에 실패했습니다.");
+      }
     }
   };
 
-  const handleRemoveProgram = (program) => {
+  const handleRemoveProgram = async (program) => {
     const confirmDelete = window.confirm(
-      `${program} 프로그램을 삭제하시겠습니까?`
+      `${program.class_name} 프로그램을 삭제하시겠습니까?`
     );
     if (confirmDelete) {
-      setUserInfo((prev) => ({
-        ...prev,
-        registeredPrograms: prev.registeredPrograms.filter(
-          (p) => p !== program
-        ),
-      }));
+      try {
+        await api.cancelClass(program.class_id); // 프로그램 삭제 API 호출
+        setRegisteredPrograms(
+          registeredPrograms.filter((p) => p.class_id !== program.class_id)
+        );
+      } catch (error) {
+        alert("삭제에 실패했습니다.");
+      }
     }
   };
 
@@ -73,6 +122,10 @@ export default function MyPage() {
   const handleGoToSurvey = () => {
     navigate("/question");
   };
+
+  if (!userInfo) {
+    return null; // 사용자 정보가 로드 중일 때
+  }
 
   return (
     <div className="myPage bg-gray-100 min-h-screen p-6 space-y-6">
@@ -104,8 +157,8 @@ export default function MyPage() {
               </label>
               <input
                 type="text"
-                name="mySchool"
-                value={editedInfo.mySchool}
+                name="school"
+                value={editedInfo.school}
                 onChange={handleChange}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-100 text-gray-700 focus:outline-main01"
               />
@@ -128,7 +181,7 @@ export default function MyPage() {
         ) : (
           <div>
             <p className="mb-2">이름: {userInfo.name}</p>
-            <p className="mb-4">학교: {userInfo.mySchool}</p>
+            <p className="mb-4">학교: {userInfo.school}</p>
             <button
               className="px-4 py-2 bg-main01 text-white rounded-lg hover:bg-main01-light transition"
               onClick={handleEditToggle}
@@ -141,20 +194,24 @@ export default function MyPage() {
 
       {/* 나의 수강권 잔액 */}
       <section className="bg-white rounded-lg shadow-md p-6">
-        <h2 className="text-lg font-semibold text-main01 mb-3">나의 수강권 잔액</h2>
-        <p className="text-gray-700">잔여 횟수: {userInfo.balance}</p>
+        <h2 className="text-lg font-semibold text-main01 mb-3">
+          나의 수강권 잔액
+        </h2>
+        <p className="text-gray-700">잔액: {userInfo.balance}</p>
       </section>
 
       {/* 즐겨찾기한 운동 장소 */}
       <section className="bg-white rounded-lg shadow-md p-6">
-        <h2 className="text-lg font-semibold text-main01 mb-3">즐겨찾기한 운동 장소</h2>
+        <h2 className="text-lg font-semibold text-main01 mb-3">
+          즐겨찾기한 스포츠 프로그램
+        </h2>
         <ul className="space-y-3">
-          {userInfo.favoritePlaces.map((place, index) => (
+          {favoritePlaces?.map((place, index) => (
             <li
               key={index}
               className="flex justify-between items-center bg-gray-100 px-3 py-2 rounded-md"
             >
-              <span>{place}</span>
+              <span>{place.class_name}</span>
               <button
                 className="px-4 py-2 text-sm bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
                 onClick={() => handleRemoveFavoritePlace(place)}
@@ -168,14 +225,16 @@ export default function MyPage() {
 
       {/* 신청한 스포츠 프로그램 */}
       <section className="bg-white rounded-lg shadow-md p-6">
-        <h2 className="text-lg font-semibold text-main01 mb-3">신청한 스포츠 프로그램</h2>
+        <h2 className="text-lg font-semibold text-main01 mb-3">
+          신청한 스포츠 프로그램
+        </h2>
         <ul className="space-y-3">
-          {userInfo.registeredPrograms.map((program, index) => (
+          {registeredPrograms?.map((program, index) => (
             <li
               key={index}
               className="flex justify-between items-center bg-gray-100 px-3 py-2  rounded-md"
             >
-              <span>{program}</span>
+              <span>{program.class_name}</span>
               <button
                 className="px-4 py-2 text-sm bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
                 onClick={() => handleRemoveProgram(program)}
@@ -191,7 +250,7 @@ export default function MyPage() {
       <section className="bg-white rounded-lg shadow-md p-6">
         <h2 className="text-lg font-semibold text-main01 mb-3">AI 추천 운동</h2>
         <ul className="space-y-3">
-          {userInfo.recommendedExercises.map((exercise, index) => (
+          {userInfo.recommendedExercises?.map((exercise, index) => (
             <li
               key={index}
               className="flex justify-between items-center bg-gray-100 px-3 py-2  rounded-md"
