@@ -61,11 +61,20 @@ const Detail = () => {
     }
   };
 
-  const handleFavoriteToggle = (classId) => {
-    if (favorites.includes(classId)) {
-      setFavorites(favorites.filter((id) => id !== classId));
-    } else {
-      setFavorites([...favorites, classId]);
+  const handleFavoriteToggle = async (classId) => {
+    try {
+      if (favorites.includes(classId)) {
+        // 이미 즐겨찾기인 경우 API 호출 생략 (추가적으로 제거 기능도 필요하면 구현)
+        setFavorites(favorites.filter((id) => id !== classId));
+      } else {
+        // 즐겨찾기가 아닌 경우 API 호출
+        await api.registerBookmark(classId);
+
+        // 성공적으로 처리되면 favorites 상태 업데이트
+        setFavorites([...favorites, classId]);
+      }
+    } catch (error) {
+      console.error("Error toggling favorite:", error);
     }
   };
 
@@ -117,17 +126,18 @@ const Detail = () => {
                 >
                   <FontAwesomeIcon
                     icon={
-                      favorites.includes(course.title)
+                      favorites.includes(course.class_id)
                         ? solidHeart
                         : regularHeart
                     }
                     className={`${
-                      favorites.includes(course.title)
+                      favorites.includes(course.class_id)
                         ? "text-red-500"
                         : "text-gray-400"
                     }`}
                   />
                 </button>
+
                 <button
                   className={`px-4 py-2 text-white text-sm rounded ${"bg-main01"}`}
                 >
