@@ -16,7 +16,6 @@ import MyPage from "./pages/myPage/MyPage";
 import SearchPage from "./pages/Search/SearchPage";
 
 import Login from "./pages/Login";
-import Main from "./pages/Main";
 import SignUp from "./pages/SignUp";
 import SignUp1 from "./pages/SignUp_1";
 import SignUp2 from "./pages/SignUp_2";
@@ -43,7 +42,7 @@ function App() {
           <Route path="/MainPage" element={<MainPage />} />
           <Route path="/search" element={<SearchPage />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/main" element={<Main />} />
+
           <Route path="/Mypage" element={<MyPage />} />
           <Route path="/signUp" element={<SignUp />} />
           <Route path="/signUp1" element={<SignUp1 />} />

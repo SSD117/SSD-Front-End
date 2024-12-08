@@ -4,6 +4,14 @@ import FilterModal from "./FilterModal";
 import badmintonImage from "../../assets/images/badminton.png";
 import soccerImage from "../../assets/images/soccer.png";
 import tennisImage from "../../assets/images/tennis.png";
+
+import basketballImage from "../../assets/images/basketball.png";
+import swimmingImage from "../../assets/images/swimming.png";
+import footballImage from "../../assets/images/football.png";
+import gymImage from "../../assets/images/gym.png";
+import yogaImage from "../../assets/images/yoga.png";
+import basicImage from "../../assets/images/basic.png";
+
 import banner1 from "../../assets/images/banner1.png";
 import banner2 from "../../assets/images/banner2.png";
 import api from "../../api/api";
@@ -19,7 +27,14 @@ export default function MainPage() {
     배드민턴: badmintonImage,
     축구: soccerImage,
     테니스: tennisImage,
+    농구: basketballImage,
+    수영: swimmingImage,
+    풋살: footballImage,
+    헬스: gymImage,
+    요가및필라테스: yogaImage,
+    기본: basicImage, // 기본 이미지
   };
+  
 
   const toggleFilter = () => {
     setIsFilterOpen(!isFilterOpen);
@@ -145,3 +160,5 @@ export default function MainPage() {
     </div>
   );
 }
+
+
