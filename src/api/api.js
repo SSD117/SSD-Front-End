@@ -1,5 +1,5 @@
 import axios from "axios";
-import dotenv from "dotenv";
+import configDotenv from "dotenv";
 
 configDotenv.config();
 const BASE_URL = process.env.BACKEND_URL || "http://localhost:3001"; // 백엔드 URL
